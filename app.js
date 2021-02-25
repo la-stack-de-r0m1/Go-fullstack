@@ -1,7 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const mongo_url = require('./mongo_auth');
 
 const app = express();
+mongoose.connect(mongo_url,
+    {   useNewUrlParser: true,
+        useUnifiedTopology: true })
+        .then(() => console.log('Connexion à MongoDB réussie !'))
+        .catch(() => console.log('Connexion à MongoDB échouée !')
+    );
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
